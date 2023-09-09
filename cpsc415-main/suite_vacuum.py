@@ -49,7 +49,7 @@ class Suite():
             logging.info('Running seeds {}-{}...'.format(start_seed,
                 ending_seed))
             output_file = 'output{}.csv'.format(start_seed)
-            cmd_line = ['python','./chunk_vacuum.py', userid, '{}-{}'.format(
+            cmd_line = ['python3','./chunk_vacuum.py', userid, '{}-{}'.format(
                 start_seed, ending_seed), str(max_steps) ]
             procs.append(subprocess.Popen(cmd_line))
             output_files.append(output_file)
