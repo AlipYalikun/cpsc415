@@ -5,7 +5,7 @@ class AyalikunVacuumAgent(VacuumAgent):
     #'Right', 'Left', 'Up', 'Down', 'Suck', 'NoOp'
     def __init__(self):
         super().__init__()
-        self.curAct = 'Right'
+        self.curAct = 'Up'
     
     def program(self, percept):
         #return super().program(percept)
@@ -14,12 +14,10 @@ class AyalikunVacuumAgent(VacuumAgent):
         if isDirt == "Dirty":
             return 'Suck'
         else:
-            if isBump == "Bump":
-                self.curAct = 'Down'
-            elif self.curAct == 'Right':
-                self.curAct = 'Up'
-            elif self.curAct == 'Up':
+            if isBump == "None":
                 self.curAct = 'Right'
+            elif self.curAct == 'Right' and isBump == "None":
+                self.curAct = "Up"
             elif self.curAct == 'Down':
                 self.curAct = 'Left'
             return self.curAct
