@@ -1,6 +1,6 @@
 from vacuum import VacuumAgent
 
-class ayalikunVaccumAgent(VacuumAgent):
+class AyalikunVaccumAgent(VacuumAgent):
     def __init__(self):
         super().__init__()
     
