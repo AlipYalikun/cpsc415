@@ -6,21 +6,28 @@ class AyalikunVacuumAgent(VacuumAgent):
     def __init__(self):
         super().__init__()
         self.curAct = 'Up'
-    
+        self.hitTopRight = True
     def program(self, percept):
-        #return super().program(percept)
         # go to up right corner and suck from row to row
         isDirt,isBump = percept
         if isDirt == "Dirty":
             return 'Suck'
         else:
-            if isBump=="None":
-                self.curAct = 'Up'
-            else:
-                if self.curAct == 'Up':
-                    self.curAct = 'Right'
-                elif self.curAct == 'Right':
+            if isBump == "None":
+                if self.curAct == "Up":
                     self.curAct = 'Up'
+                elif self.curAct == "Down":
+                    self.curAct = 'Right'
+                elif self.curAct == "Right":
+                    self.curAct = 'Up'
+            if isBump=="Bump":
+                if self.curAct == 'Up':
+                    self.curAct = 'Down'
+                elif self.curAct == 'Right':
+                    self.curAct = 'Up'            
+                
+            else:
+                pass
             return self.curAct
             #directions = ['Left', 'Right', 'Up', 'Down']
             #return random.choice(directions)
