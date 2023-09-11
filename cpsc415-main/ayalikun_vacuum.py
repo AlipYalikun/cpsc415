@@ -18,17 +18,17 @@ class AyalikunVacuumAgent(VacuumAgent):
             elif self.curAct == "Right" and isBump == "Bump":
                 self.curAct = 'Down'
             elif self.curAct == "Up" and isBump == "Bump":
-                self.curAct = 'Right'
+                self.curAct = 'Left'
             elif self.curAct == "Down" and isBump == "Bump":
-                self.curAct = 'Up'
+                self.curAct = 'Left'
             if self.curAct == "Up" and isBump == "None":
                 self.curAct = 'Up'
             elif self.curAct == "Right" and isBump == "None":
-                self.curAct = 'Up'
-            elif self.curAct == "Up" and isBump == "None":
-                self.curAct = 'Down'
-            elif self.curAct == "Down" and isBump == "None":
                 self.curAct = 'Right'
+            elif self.curAct == "Up" and isBump == "None":
+                self.curAct = 'Left'
+            elif self.curAct == "Down" and isBump == "None":
+                self.curAct = 'Left'
             return self.curAct
             #directions = ['Left', 'Right', 'Up', 'Down']
             #return random.choice(directions)
