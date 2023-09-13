@@ -23,29 +23,45 @@ class AyalikunVacuumAgent(VacuumAgent):
             # go left minus 1 to x go right plus 1 to x
             
             curAct = random.choice(directions)
-        
+            next_cord = self.cord
             if curAct == "Right" and isBump == "None":
-                self.cord = (self.cord[0] + 1 , self.cord[1])
+                next_cord = (self.cord[0] + 1 , self.cord[1])
             elif curAct == "Left" and isBump == "None":
-                self.cord = (self.cord[0] - 1 , self.cord[1])
+                next_cord = (self.cord[0] - 1 , self.cord[1])
             elif curAct == "Up" and isBump == "None":
-                self.cord = (self.cord[0], self.cord[1] + 1)
+                next_cord = (self.cord[0], self.cord[1] + 1)
             elif curAct == "Down" and isBump == "None":
-                self.cord = (self.cord[0], self.cord[1] - 1)
+                next_cord = (self.cord[0], self.cord[1] - 1)
             elif curAct == "Right" and isBump == "Bump":
-                self.cord = (self.cord[0] , self.cord[1])
+                if self.cord[0] > 0:
+                    next_cord = (self.cord[0] - 1 , self.cord[1])
+                else:
+                    next_cord = (self.cord[0] + 1 , self.cord[1])
             elif curAct == "Left" and isBump == "Bump":
-                self.cord = (self.cord[0] , self.cord[1])
+                if self.cord[0] < 0 :
+                    next_cord = (self.cord[0] + 1, self.cord[1])
+                else:
+                    next_cord = (self.cord[0] - 1 , self.cord[1])
             elif curAct == "Up" and isBump == "Bump":
-                self.cord = (self.cord[0] , self.cord[1])
+                if self.cord[1] > 0:
+                    next_cord = (self.cord[0] , self.cord[1] - 1)
+                else:
+                    next_cord = (self.cord[0] , self.cord[1] + 1)
             elif curAct == "Down" and isBump == "Bump":
-                self.cord = (self.cord[0] , self.cord[1])
-              
+                if self.cord[1] < 0:
+                    next_cord = (self.cord[0] , self.cord[1] + 1)
+                else:
+                    next_cord = (self.cord[0] , self.cord[1] - 1)
             #uid = str(uuid.uuid4().fields[-1])[:6]
-            dic[self.cord] = curAct
-            self.listOdDic.append(dic)
-            print(self.listOdDic)
-            return curAct
+            #dic[self.cord] = curAct
+            if next_cord in self.listOdDic:
+                pass
+            else:
+                self.listOdDic.append(next_cord)
+                print(self.listOdDic)
+                print(len(self.listOdDic))
+                self.cord = next_cord
+                return curAct
             #if self.curAct == "Left" and isBump == "Bump":
              #   self.curAct = 'Right'
             #elif self.curAct == "Right" and isBump == "Bump":
