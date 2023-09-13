@@ -17,9 +17,10 @@ class AyalikunVacuumAgent(VacuumAgent):
         else:
             directions = ['Left', 'Right', 'Up', 'Down']
             curAct = random.choice(directions)
-            uid = str(uuid.uuid4().fields[-1])[:5]
-            self.listOdDic.append(dic.update({uid:curAct}))
-            print(dic)
+            uid = str(uuid.uuid4().fields[-1])[:6]
+            dic[uid] = curAct
+            self.listOdDic.append(dic)
+            print(self.listOdDic)
             return curAct
             #if self.curAct == "Left" and isBump == "Bump":
              #   self.curAct = 'Right'
@@ -36,7 +37,5 @@ class AyalikunVacuumAgent(VacuumAgent):
              #   self.curAct = 'Right'
             #elif self.curAct == "Down" and isBump == "None":
              #   self.curAct = 'Left'
-            #return self.curAct
-    def uid(self):
-        return str(uuid.uuid4().fields[-1])[:5]     
+            #return self.curAct  
  
