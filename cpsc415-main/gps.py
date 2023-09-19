@@ -6,9 +6,9 @@ Stephen Davies, University of Mary Washington, fall 2023
 '''
 
 from atlas import Atlas
-import numpy as np
+import numpy as np 
 import sys
-
+import math
 
 def find_path(atlas, alg):
     '''Finds a path from src to dest using a specified algorithm, and
@@ -21,9 +21,22 @@ def find_path(atlas, alg):
     of that path.'''
 
     # THIS IS WHERE YOUR AMAZING CODE GOES
-
+    aCity = Atlas(int(sys.argv[1]))
+    indexNumOfCity = aCity.get_num_cities() -1 
+    path = []
+    v = []
+    length = 0
+    print(aCity._adj_mat)
+    for i in range(indexNumOfCity+1):
+        for j in range(indexNumOfCity+1):
+            dist = aCity.get_road_dist(i,j)
+            if dist != 0 and dist != math.inf:
+                path.append(i)
+                v.append(dist)
     # Here's a (bogus) example return value:
-    return ([0,3,2,4],970)
+    #print(indexNumOfCity)
+    print(v)
+    return (path,length)
 
 
 

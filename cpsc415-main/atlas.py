@@ -68,5 +68,6 @@ def gen_adj_mat(longs, lats, prob_edge=.2,
                     am[j,i] = am[i,j]
                 else:
                     am[i,j] = am[j,i] = math.inf
+    #print(np.around(am,1))
     return np.around(am,1)
 
