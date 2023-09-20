@@ -22,11 +22,10 @@ def find_path(atlas, alg):
 
     # THIS IS WHERE YOUR AMAZING CODE GOES
     if sys.argv[2] == 'Dijkstras':
-        aCity = Atlas(int(sys.argv[1]))
+        aCity = Atlas.from_filename('ten.atlas')
         indexNumOfCity = aCity.get_num_cities() -1 
         path = []
         v = []
-        dic = {}
         length = 0
         print(aCity._adj_mat)
         for i in range(indexNumOfCity+1):
@@ -35,8 +34,12 @@ def find_path(atlas, alg):
                 if dist != 0 and dist != math.inf:
                     path.append(i)
                     v.append(dist)
+        tups =  list(zip(path, v))
+        print(tups)
         # Here's a (bogus) example return value:
         #print(indexNumOfCity)
+        print(len(path))
+        print(len(v))
         print(v)
     return (path,length)
 
