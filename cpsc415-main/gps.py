@@ -21,21 +21,23 @@ def find_path(atlas, alg):
     of that path.'''
 
     # THIS IS WHERE YOUR AMAZING CODE GOES
-    aCity = Atlas(int(sys.argv[1]))
-    indexNumOfCity = aCity.get_num_cities() -1 
-    path = []
-    v = []
-    length = 0
-    print(aCity._adj_mat)
-    for i in range(indexNumOfCity+1):
-        for j in range(indexNumOfCity+1):
-            dist = aCity.get_road_dist(i,j)
-            if dist != 0 and dist != math.inf:
-                path.append(i)
-                v.append(dist)
-    # Here's a (bogus) example return value:
-    #print(indexNumOfCity)
-    print(v)
+    if sys.argv[2] == 'Dijkstras':
+        aCity = Atlas(int(sys.argv[1]))
+        indexNumOfCity = aCity.get_num_cities() -1 
+        path = []
+        v = []
+        dic = {}
+        length = 0
+        print(aCity._adj_mat)
+        for i in range(indexNumOfCity+1):
+            for j in range(indexNumOfCity+1):
+                dist = aCity.get_road_dist(i,j)
+                if dist != 0 and dist != math.inf:
+                    path.append(i)
+                    v.append(dist)
+        # Here's a (bogus) example return value:
+        #print(indexNumOfCity)
+        print(v)
     return (path,length)
 
 
