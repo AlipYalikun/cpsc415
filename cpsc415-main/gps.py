@@ -19,29 +19,25 @@ def find_path(atlas, alg):
     starting with 0 and ending with atlas.num_cities-1, that gives the
     optimal path between those two cities. The second is the total cost
     of that path.'''
-
-    # THIS IS WHERE YOUR AMAZING CODE GOES
-    if sys.argv[2] == 'Dijkstras':
-        aCity = Atlas.from_filename('ten.atlas')
-        indexNumOfCity = aCity.get_num_cities() -1 
-        path = []
-        v = []
-        length = 0
-        print(aCity._adj_mat)
+    if alg == 'Dijkstras':
+        indexNumOfCity = atlas.get_num_cities() -1 
+        pathes = []
+        values = []
+        a = atlas._adj_mat
+        print(a)
+        print(a[0,:])
+        n = len(a)
+        distances = np.full(n, np.inf)
+        print(distances)
         for i in range(indexNumOfCity+1):
             for j in range(indexNumOfCity+1):
-                dist = aCity.get_road_dist(i,j)
+                dist = atlas.get_road_dist(i,j)
                 if dist != 0 and dist != math.inf:
-                    path.append(i)
-                    v.append(dist)
-        tups =  list(zip(path, v))
-        print(tups)
-        # Here's a (bogus) example return value:
-        #print(indexNumOfCity)
-        print(len(path))
-        print(len(v))
-        print(v)
-    return (path,length)
+                    pathes.append(i)
+                    values.append(dist)
+        p = []
+        l = 0
+    return (p,l)
 
 
 
