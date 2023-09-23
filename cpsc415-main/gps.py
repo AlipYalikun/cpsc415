@@ -33,6 +33,8 @@ def find_path(atlas, alg):
         #root node is always zero 
         rootCity = 0
         distance[rootCity] = 0
+        #setting unvisited nodes to false once visited it will be true
+        unvisited = [False] * numOfCity
         
         print(distance)
         #print(a[0,:])\
