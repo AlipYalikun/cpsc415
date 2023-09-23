@@ -25,16 +25,22 @@ def find_path(atlas, alg):
         values = []
         a = atlas._adj_mat
         print(a)
-        print(a[0,:])
-        n = len(a)
-        distances = np.full(n, np.inf)
-        print(distances)
-        for i in range(indexNumOfCity+1):
-            for j in range(indexNumOfCity+1):
-                dist = atlas.get_road_dist(i,j)
-                if dist != 0 and dist != math.inf:
-                    pathes.append(i)
-                    values.append(dist)
+        print(a[3,6])
+        print(a[6,3])
+        #print(a[0,:])\
+        num = 0
+        steps = []
+        s = {}
+        step = []
+        for row_index, row in enumerate(a):
+            nice = [val for val in row if val != 0 and val != math.inf]
+            if nice:
+                s[row_index] = sorted(nice)
+            for index, value in enumerate(row):
+                if value > num and value != math.inf:
+                    print(f'[{row_index}, {index}]: {value}')
+        #steps.append(s)
+        print(s)      
         p = []
         l = 0
     return (p,l)
