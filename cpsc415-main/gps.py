@@ -25,8 +25,6 @@ def find_path(atlas, alg):
     if alg == 'Dijkstras':
         a = atlas._adj_mat
         print(a)
-        print(a[3,6])
-        print(a[6,3])
         # setting distance from nodes to infinite first
         numOfCity = atlas.get_num_cities()
         distance = [math.inf] * numOfCity
@@ -34,31 +32,46 @@ def find_path(atlas, alg):
         rootCity = 0
         distance[rootCity] = 0
         #setting unvisited nodes to false once visited it will be true
-        unvisited = [False] * numOfCity
+        visited = [False] * numOfCity
+        #print(distance)
+        #setting previous to -1
+        previous = [-1] * numOfCity
+        #print(a[0,:])
+        #num = 0
+        #nums = []
+        expanded = atlas._nodes_expanded
+        for city in range(numOfCity):
+            unvisitedC = [i for i in range(numOfCity) if not visited[i]]
+            currentC = min(unvisitedC, key=lambda i: distance[i])
+            #adding expanded node
+            expanded.add(currentC)
+            visited[currentC] = True
+            for neighborC in range(numOfCity):
+                #updating distance if shorter is found
+                if not visited[neighborC] and atlas.get_road_dist(currentC, neighborC) > 0:
+                    newD = distance[currentC] + atlas.get_road_dist(currentC, neighborC)
+                    if newD < distance[neighborC]:
+                        distance[neighborC] = newD
+                        previous[neighborC] = currentC
         
-        print(distance)
-        #print(a[0,:])\
-        num = 0
-        nums = []
-        visited = atlas._nodes_expanded
-        s = {}
-        for row_index, row in enumerate(a):
-            vals = [(j,num) for j, num in enumerate(row) if num > 0 and num != math.inf]
-            if vals:
-                s[row_index] = vals
+        #s = {}
+        #for row_index, row in enumerate(a):
+        #    vals = [(j,num) for j, num in enumerate(row) if num > 0 and num != math.inf]
+        #    if vals:
+        #        s[row_index] = vals
         #for node in s:
-        for node, v in s.items():
-            sorteD =  sorted(v, key=lambda x: min(x))
-            for index, value in sorteD:
-                print(f"Row {node}: Index: {index}, Value: {value}")
-                if value > num:
-                    num = value
-                    nums.append(num)
-                    num = 0
-        print(s)      
+        #for node, v in s.items():
+        #    sorteD =  sorted(v, key=lambda x: min(x))
+        #    for index, value in sorteD:
+        #        print(f"Row {node}: Index: {index}, Value: {value}")
+        #        if value > num:
+        #            num = value
+        #            nums.append(num)
+        #            num = 0
+        #print(s)      
         p = []
         l = 0
-        print(nums)
+        #print(nums)
     return (p,l)
 
 
