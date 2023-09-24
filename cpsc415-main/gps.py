@@ -67,7 +67,6 @@ def find_path(atlas, alg):
             path.append(currentC)
             currentC = previous[currentC]
         path.reverse()
-        print(expanded)
         #print("visited node: ", expanded)
 
         #s = {}
@@ -114,12 +113,16 @@ if __name__ == '__main__':
         print(f'Loading atlas from file {sys.argv[1]}')
         usa = Atlas.from_filename(sys.argv[1])
         print('...loaded.')
-    if sys.argv[2] == "Dijkstras":
+    if sys.argv[2] == "Dijkstras" and sys.argv[1] == "ten.atlas" :
         path, cost = find_path(usa, alg)
         print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
             f' costs {cost}: {path}.')
         ne = usa._nodes_expanded
         print(f'It expanded {len(ne)} nodes: {ne}')
+    elif sys.argv[2] == "Dijkstras":
+        path, cost = find_path(usa, alg)
+        print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
+            f' costs {cost}: {path}.')
     else:
         print(f"{sys.argv[2]} is not implemented unfortunately :(")
 
