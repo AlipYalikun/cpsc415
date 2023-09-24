@@ -27,7 +27,7 @@ def find_path(atlas, alg):
         return strr
     if alg == 'Dijkstras':
         a = atlas._adj_mat
-        print(a)
+        #print(a)
         # setting distance from nodes to infinite first
         numOfCity = atlas.get_num_cities()
         distance = [math.inf] * numOfCity
@@ -51,7 +51,7 @@ def find_path(atlas, alg):
             visited[currentC] = True
             for neighborC in range(numOfCity):
                 #updating distance if shorter is found
-                if not visited[neighborC] and a[currentC][neighborC] > 0:
+               if not visited[neighborC] and a[currentC][neighborC] > 0:
                     newD = distance[currentC] + a[currentC][neighborC]
                     #update the distace and previos node if shorter found
                     if newD < distance[neighborC]:
@@ -59,6 +59,7 @@ def find_path(atlas, alg):
                         previous[neighborC] = currentC
                         if neighborC != (numOfCity - 1): 
                             expanded.add(neighborC)
+                        
         #recoanstruct the path
         path = []
         currentC = numOfCity -1
@@ -66,6 +67,7 @@ def find_path(atlas, alg):
             path.append(currentC)
             currentC = previous[currentC]
         path.reverse()
+        print(expanded)
         #print("visited node: ", expanded)
 
         #s = {}
