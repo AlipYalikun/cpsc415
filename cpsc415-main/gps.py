@@ -116,10 +116,11 @@ if __name__ == '__main__':
         print(f'Loading atlas from file {sys.argv[1]}')
         usa = Atlas.from_filename(sys.argv[1])
         print('...loaded.')
-    
-    path, cost = find_path(usa, alg)
-    print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
-        f' costs {cost}: {path}.')
-    ne = usa._nodes_expanded
-    print(f'It expanded {len(ne)} nodes: {ne}')
-
+    if sys.argv[2] == "Dijkstras":
+        path, cost = find_path(usa, alg)
+        print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
+            f' costs {cost}: {path}.')
+        ne = usa._nodes_expanded
+        print(f'It expanded {len(ne)} nodes: {ne}')
+    else:
+        print("Unimplemented :(")
