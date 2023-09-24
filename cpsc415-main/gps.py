@@ -22,6 +22,9 @@ def find_path(atlas, alg):
     for index, value in enumerate(row):
                 if value > num and value != math.inf:
                     print(f'[{row_index}, {index}]: {value}')'''
+    if alg == "greedy" or alg == "A*":
+        strr = "Unimplemented"
+        return strr
     if alg == 'Dijkstras':
         a = atlas._adj_mat
         print(a)
@@ -41,19 +44,30 @@ def find_path(atlas, alg):
         #nums = []
         expanded = atlas._nodes_expanded
         for city in range(numOfCity):
+            #get list of unvisited cities
             unvisitedC = [i for i in range(numOfCity) if not visited[i]]
+            #find the unvisited city with the shortest distance from the source
             currentC = min(unvisitedC, key=lambda i: distance[i])
-            #adding expanded node
-            expanded.add(currentC)
             visited[currentC] = True
             for neighborC in range(numOfCity):
                 #updating distance if shorter is found
-                if not visited[neighborC] and atlas.get_road_dist(currentC, neighborC) > 0:
-                    newD = distance[currentC] + atlas.get_road_dist(currentC, neighborC)
+                if not visited[neighborC] and a[currentC][neighborC] > 0:
+                    newD = distance[currentC] + a[currentC][neighborC]
+                    #update the distace and previos node if shorter found
                     if newD < distance[neighborC]:
                         distance[neighborC] = newD
                         previous[neighborC] = currentC
-        
+                        if neighborC != (numOfCity - 1): 
+                            expanded.add(neighborC)
+        #recoanstruct the path
+        path = []
+        currentC = numOfCity -1
+        while currentC != -1:
+            path.append(currentC)
+            currentC = previous[currentC]
+        path.reverse()
+        #print("visited node: ", expanded)
+
         #s = {}
         #for row_index, row in enumerate(a):
         #    vals = [(j,num) for j, num in enumerate(row) if num > 0 and num != math.inf]
@@ -69,11 +83,10 @@ def find_path(atlas, alg):
         #            nums.append(num)
         #            num = 0
         #print(s)      
-        p = []
-        l = 0
         #print(nums)
-    return (p,l)
-
+        cost = distance[numOfCity-1]
+    return (path,cost)
+   
 
 
 if __name__ == '__main__':
@@ -99,10 +112,12 @@ if __name__ == '__main__':
         print(f'Loading atlas from file {sys.argv[1]}')
         usa = Atlas.from_filename(sys.argv[1])
         print('...loaded.')
-
-    path, cost = find_path(usa, alg)
-    print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
-        f' costs {cost}: {path}.')
-    ne = usa._nodes_expanded
-    print(f'It expanded {len(ne)} nodes: {ne}')
+    if sys.argv[2] == "Dijkstras":
+        path, cost = find_path(usa, alg)
+        print(f'The {alg} path from 0 to {usa.get_num_cities()-1}'
+            f' costs {cost}: {path}.')
+        ne = usa._nodes_expanded
+        print(f'It expanded {len(ne)} nodes: {ne}')
+    else:
+        print(f"{sys.argv[2]} is not implemented unfortunately :(")
 
