@@ -53,7 +53,9 @@ def find_path(atlas, alg):
                #print(f'considering the neighbor {neighborC}')
                 #updating distance if shorter is found
                if not visited[neighborC] and atlas.get_road_dist(currentC, neighborC) != math.inf:
-                    newD = distance[currentC] + atlas.get_road_dist(currentC, neighborC)
+                    if neighborC != currentC:
+                        at = atlas.get_road_dist(currentC, neighborC)
+                    newD = distance[currentC] + at
                     #print(f"New distance to {neighborC}: {newD}")
                     #update the distace and previos node if shorter found
                     if newD < distance[neighborC]:
