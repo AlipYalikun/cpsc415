@@ -13,6 +13,16 @@ import random
 import math
 
 
+def sumOfDistOfEach(puzzle):
+    totDist = 0
+    for i in range(puzzle.n):
+        for j in range(puzzle.n):
+            if puzzle.grid[i, j] != -1:
+                cRow = (puzzle.grid[i, j] - 1) // puzzle.n
+                cCol = (puzzle.grid[i, j] - 1) % puzzle.n
+                totDist += abs(i - cRow) + abs(j - cCol)
+
+    return totDist
 
 def solve(p):
     '''Finds a sequence of moves ("L", "U", "R", or "D") that will solve the
