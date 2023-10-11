@@ -8,6 +8,10 @@ Stephen Davies, University of Mary Washington, fall 2023
 from puzzle import Puzzle
 import numpy as np
 import sys
+from copy import deepcopy
+import random 
+import math
+
 
 
 def solve(p):

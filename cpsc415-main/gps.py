@@ -91,6 +91,7 @@ def find_path(atlas, alg):
         #print(s)      
         #print(nums)
         cost = distance[numOfCity-1]
+        print(np.random.zeros)
     return (path,cost)
    
 

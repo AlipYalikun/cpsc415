@@ -57,13 +57,16 @@ class Puzzle():
             moves += ["L"]
         if empty_sq[1] < self.n-1:
             moves += ["R"]
+        
         return moves
 
     def move(self, the_move):
         """
         Return True if the move worked, otherwise False.
         """
+        #print(f"Received move: {the_move}")
         if the_move not in self.legal_moves():
+            #print(f"Illegal move {the_move}!")
             return False     # Illegal move {the_move}!
         e_sq = np.where(self.grid == -1)    # could cache this
         if the_move == "L":
@@ -108,7 +111,7 @@ class Puzzle():
         print(self)
 
     def __eq__(self, other):
-        return np.all(self.grid == other.grid)
+        return np.all(self.grid==other.grid)
 
     def __str__(self):
         num_digs = math.ceil(math.log(self.n**2 + 1, 10))
