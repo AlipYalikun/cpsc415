@@ -24,14 +24,12 @@ def sumOfDistOfEach(puzzle):
 
     return totDist
 
-def solve(p):
-    '''Finds a sequence of moves ("L", "U", "R", or "D") that will solve the
-    Puzzle object passed. Returns that sequence in a list.
-    '''
-    # THIS IS WHERE YOUR AMAZING CODE GOES
-
-    # Here's a (bogus) example return value:
-    return ["D","U","L","L"]
+def simAnnealing(initP):
+    BIGITER=100000
+    temperature=10000
+    coolingRate=0.998
+    
+    return 
 
 
 
