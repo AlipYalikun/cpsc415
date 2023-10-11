@@ -23,13 +23,31 @@ def sumOfDistOfEach(puzzle):
                 totDist += abs(i - cRow) + abs(j - cCol)
 
     return totDist
+def randomMove(puzzle):
+    numMoves = random.randint(1, 25) 
+    copy = deepcopy(puzzle)
+    for i in range(numMoves):
+        legal_moves = copy.legal_moves()
+        random_move = random.choice(legal_moves)
+        copy.move(random_move)
+    return copy
+
 
 def simAnnealing(initP):
     BIGITER=100000
     temperature=10000
     coolingRate=0.998
+    cur = initP
+    curSumOfDist = sumOfDistOfEach(cur)
+    print(f'Sum of current out of place tiles: {curSumOfDist}.')
+    best = cur
+    bestSum = curSumOfDist
+
+   
+
+    return best
+
     
-    return 
 
 
 
@@ -50,9 +68,11 @@ if __name__ == '__main__':
     # Create a random puzzle of the appropriate size and solve it.
     puzzle = Puzzle.gen_random_puzzle(n, seed)
     print(puzzle)
-    solution = solve(puzzle)
-    if puzzle.has_solution(solution):
-        input("Yay, this puzzle is solved! Press Enter to watch.")
-        puzzle.verify_visually(solution)
+    solution = simAnnealing(puzzle)
+    if solution is not None:
+        print("Solution found!")
+        input("Press Enter to watch.")
+        print(solution)
+        #solution.verify_visually([solution])
     else:
-        print(f"Sorry, {''.join(solution)} does not solve this puzzle.")
+        print(f"Sorry, no solution.")
