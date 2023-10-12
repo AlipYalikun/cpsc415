@@ -35,7 +35,7 @@ def randomMove(puzzle):
 
 def simAnnealing(initP):
     BIGITER=100000
-    temperature=10000
+    temperature=1000
     coolingRate=0.998
     cur = initP
     curSumOfDist = sumOfDistOfEach(cur)
@@ -43,7 +43,23 @@ def simAnnealing(initP):
     best = cur
     bestSum = curSumOfDist
 
-   
+    for i in range(BIGITER):
+        if curSumOfDist == 0:
+            return best
+        new = randomMove(cur)
+        newSum = sumOfDistOfEach(new)
+
+        if newSum < curSumOfDist or random.random() < math.exp((curSumOfDist - newSum)/ temperature ):
+            cur = new
+            curSumOfDist = newSum
+
+            if newSum < bestSum:
+                best = new
+                bestSum = newSum
+        temperature *= coolingRate
+        if BIGITER % 1000 ==0:
+            print(cur)
+    print(f'Sum of out of place tiles after annealing: {curSumOfDist}')
 
     return best
 
@@ -70,7 +86,6 @@ if __name__ == '__main__':
     print(puzzle)
     solution = simAnnealing(puzzle)
     if solution is not None:
-        print("Solution found!")
         input("Press Enter to watch.")
         print(solution)
         #solution.verify_visually([solution])
