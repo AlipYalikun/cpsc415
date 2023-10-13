@@ -57,7 +57,7 @@ def simAnnealing(initP):
                 best = new
                 bestSum = newSum
         temperature *= coolingRate
-        if BIGITER % 1000 ==0:
+        if BIGITER % 10000 ==0:
             print(cur)
     print(f'Sum of out of place tiles after annealing: {curSumOfDist}')
 
